@@ -1,23 +1,96 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>餐廳預約系統</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Morimoto Café 線上訂位</title>
+  <style>
+    body {
+      font-family: "Helvetica Neue", sans-serif;
+      background-color: #f8f8f8;
+      margin: 0;
+      padding: 40px;
+      color: #333;
+    }
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      margin-top: 20px;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #555;
+    }
+    .success {
+      text-align: center;
+      color: green;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-  <h1>線上預約表單</h1>
-  <form id="reservationForm">
-    姓名：<input type="text" name="name" required><br><br>
-    電話：<input type="text" name="phone" required><br><br>
-    日期：<input type="date" name="date" required><br><br>
-    時間：<input type="time" name="time" required><br><br>
-    <button type="submit">送出預約</button>
-  </form>
+  <div class="container">
+    <h1>線上訂位</h1>
+    <form id="reservationForm">
+      <label for="name">姓名</label>
+      <input type="text" id="name" required>
+
+      <label for="phone">電話</label>
+      <input type="tel" id="phone" required>
+
+      <label for="people">人數</label>
+      <select id="people" required>
+        <option value="">請選擇</option>
+        <option>1</option><option>2</option><option>3</option>
+        <option>4</option><option>5</option><option>6</option>
+      </select>
+
+      <label for="date">日期</label>
+      <input type="date" id="date" required>
+
+      <label for="time">時間</label>
+      <input type="time" id="time" required>
+
+      <button type="submit">送出預約</button>
+    </form>
+    <div class="success" id="successMessage" style="display: none;">
+      預約成功！我們將盡快與您聯繫。
+    </div>
+  </div>
 
   <script>
-    document.getElementById("reservationForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      alert("預約成功！（之後會連接資料庫）");
+    const form = document.getElementById("reservationForm");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      // 之後可加上連線 API 儲存到資料庫
+      document.getElementById("successMessage").style.display = "block";
+      form.reset();
     });
   </script>
 </body>
